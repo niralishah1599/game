@@ -1,0 +1,49 @@
+<div class="con">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-6">
+          {{currentQuestionSet.question}}
+        </div>
+        <div class="col-md-4">
+          <div style="color:red">
+            {{timeLeft}} seconds left
+          </div>
+        </div>
+        <div class="col-md-2" style="color:darkgrey">
+          {{currentIndex+1}}/{{questions.length}}
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">Special title treatment</h5> -->
+
+      <div *ngFor="let o of currentQuestionSet.option">
+        <div class="text">
+
+          <span>{{o.optionid}}. {{o.name}}</span>
+          <input class="styled-checkbox" type="checkbox" [id]="o.optionid" [name]="o.name" [(ngModel)]="o.Checked"
+            (ngModelChange)="getCheckboxValues($event,o.optionid)">
+          <label [for]="o.optionid"></label>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row" style="width:700px;margin-left:10px;">
+      <div class="col-md-8">
+        <ng-container *ngIf="newArray.length>0">
+          Ans: {{str}}
+        </ng-container>
+      </div>
+      <div class="col-md-4">
+        <button *ngIf="(currentIndex+1) != questions.length" (click)="next()" class="btn btn-primary"
+          style="width:80px;margin-bottom:10px;">Next</button>
+        <button *ngIf="(currentIndex+1) == questions.length" (click)="submit()" class="btn btn-success"
+          style="width:80px;margin-bottom:10px;">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
